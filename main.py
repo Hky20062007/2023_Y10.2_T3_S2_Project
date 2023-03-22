@@ -19,6 +19,9 @@
 #      Input the returndate into the loan table
 
 import datetime 
+import sqlite3
+
+DBFILE="Library.db"
 
 
 def Scan_MemberID():
@@ -43,9 +46,9 @@ def Return_the_book():
  try:
          squilConncettion = sqlite3.connect('sql.db')
          cursor = sqliteConnection.cursor()
-         query = ''
+         query = 'SELECT * from LoanTable Where isbn={isbn} and borrowdate=NULL'
          cursor.execute(query)
-         result = cursor.fetchall()
+         result = cursor.fetchone()[2]
          cursor.close()
  except sqlite3.Error as error:
          print('Error occured-',error)
